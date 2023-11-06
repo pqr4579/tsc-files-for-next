@@ -53,7 +53,14 @@ const tmpTsconfig = {
     skipLibCheck: true,
   },
   files,
-  include: [],
+  include: Array.from(
+    new Set(
+      'next-env.d.ts',
+      '**/*.ts',
+      '**/*.tsx',
+      ...(tsconfig.include ?? []),
+    ),
+  ),
 }
 fs.writeFileSync(tmpTsconfigPath, JSON.stringify(tmpTsconfig, null, 2))
 
